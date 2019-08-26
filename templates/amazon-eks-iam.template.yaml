@@ -166,6 +166,16 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
         - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+      Policies:
+        - PolicyName: !Sub "${AWS::StackName}-k8s-lbs-perms"
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeAccountAttributes
+                  - ec2:DescribeInternetGateways
+                Resource: "*"
   ControlPlanePassRole:
     Type: "AWS::IAM::Policy"
     Properties:
